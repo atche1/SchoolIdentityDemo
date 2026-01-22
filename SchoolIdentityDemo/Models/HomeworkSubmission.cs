@@ -21,7 +21,7 @@ public class HomeworkSubmission
     public string Content { get; set; } = "";
 
     public DateTime SubmittedAt { get; set; } = DateTime.UtcNow;
-
+    [Range(2,6,ErrorMessage ="The grade must be between 2 and 6")]
     public int? Grade { get; set; }
 
     [MaxLength(1000)]

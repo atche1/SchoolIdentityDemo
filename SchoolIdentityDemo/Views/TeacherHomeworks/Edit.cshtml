@@ -3,10 +3,12 @@
     ViewData["Title"] = "Редакция";
 }
 <h1>@ViewData["Title"]</h1>
+<div asp-validation-summary="All" class="text-danger"></div>
 
 <form method="post">
     @Html.AntiForgeryToken()
     <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="TeacherId" />
 
     <div class="mb-3">
         <label class="form-label">Заглавие</label>
