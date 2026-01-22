@@ -1,0 +1,36 @@
+﻿@model List<SchoolIdentityDemo.Models.Homework>
+
+@{
+    ViewData["Title"] = "Домашни";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Заглавие</th>
+            <th>Краен срок</th>
+            <th>Публикувано</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var h in Model)
+        {
+            <tr>
+                <td>@h.Title</td>
+                <td>@h.DueDate.ToString("dd.MM.yyyy")</td>
+                <td>@h.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy")</td>
+                <td>
+                    <a class="btn btn-sm btn-primary"
+                       asp-action="Details"
+                       asp-route-id="@h.Id">
+                        Details
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

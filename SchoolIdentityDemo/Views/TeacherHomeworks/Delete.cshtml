@@ -1,0 +1,15 @@
+﻿@model SchoolIdentityDemo.Models.Homework
+@{
+    ViewData["Title"] = "Изтриване";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="alert alert-danger">
+    Сигурен ли си, че искаш да изтриеш: <strong>@Model.Title</strong> ?
+</div>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+    <button class="btn btn-danger" type="submit">Delete</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+</form>

@@ -1,0 +1,34 @@
+﻿@model SchoolIdentityDemo.Models.Homework
+@{
+    ViewData["Title"] = "Ново домашно";
+}
+<h1>@ViewData["Title"]</h1>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label class="form-label">Заглавие</label>
+        <input class="form-control" asp-for="Title" />
+        <span class="text-danger" asp-validation-for="Title"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Описание</label>
+        <textarea class="form-control" asp-for="Description" rows="5"></textarea>
+        <span class="text-danger" asp-validation-for="Description"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Краен срок</label>
+        <input class="form-control" asp-for="DueDate" type="date" />
+        <span class="text-danger" asp-validation-for="DueDate"></span>
+    </div>
+
+    <button class="btn btn-success" type="submit">Save</button>
+    <a class="btn btn-secondary" asp-action="Index">Back</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,39 @@
+﻿@model List<SchoolIdentityDemo.Models.HomeworkSubmission>
+@{
+    ViewData["Title"] = "Предадени решения";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p><strong>Домашно:</strong> @ViewBag.HomeworkTitle</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ученик</th>
+            <th>Предадено</th>
+            <th>Оценка</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@(s.Student?.Email ?? s.StudentId)</td>
+                <td>@s.SubmittedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@(s.Grade?.ToString() ?? "-")</td>
+                <td>
+                    <a class="btn btn-sm btn-primary"
+                       asp-action="Grade"
+                       asp-route-id="@s.Id">
+                        Grade
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-secondary" asp-controller="TeacherHomeworks" asp-action="Index">Back</a>
+

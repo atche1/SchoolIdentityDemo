@@ -1,0 +1,40 @@
+﻿@model SchoolIdentityDemo.Models.StudentProfile
+@{
+    ViewData["Title"] = "Моят Student профил";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">@TempData["msg"]</div>
+}
+
+<form method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="UserId" />
+
+    <div class="mb-3">
+        <label class="form-label">Клас</label>
+        <input class="form-control" asp-for="Grade" />
+        <span class="text-danger" asp-validation-for="Grade"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Номер</label>
+        <input class="form-control" asp-for="NumberInClass" />
+        <span class="text-danger" asp-validation-for="NumberInClass"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Специалност</label>
+        <input class="form-control" asp-for="Specialty" />
+        <span class="text-danger" asp-validation-for="Specialty"></span>
+    </div>
+
+    <button class="btn btn-success" type="submit">Save</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

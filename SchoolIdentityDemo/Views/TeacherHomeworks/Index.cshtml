@@ -1,0 +1,31 @@
+﻿@model List<SchoolIdentityDemo.Models.Homework>
+@{
+    ViewData["Title"] = "Моите домашни";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p><a class="btn btn-success" asp-action="Create">+ Ново домашно</a></p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Заглавие</th>
+            <th>Краен срок</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var h in Model)
+        {
+            <tr>
+                <td>@h.Title</td>
+                <td>@h.DueDate.ToString("dd.MM.yyyy")</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@h.Id">Edit</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@h.Id">Delete</a>
+                    <a class="btn btn-sm btn-secondary" asp-controller="TeacherSubmissions" asp-action="ForHomework" asp-route-homeworkId="@h.Id">Submissions</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

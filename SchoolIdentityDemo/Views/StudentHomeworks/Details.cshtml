@@ -1,0 +1,71 @@
+﻿@model SchoolIdentityDemo.Models.Homework
+
+@{
+    ViewData["Title"] = "Домашно";
+    var submission = ViewBag.Submission as SchoolIdentityDemo.Models.HomeworkSubmission;
+}
+
+<h1>@Model.Title</h1>
+
+<p>
+    <strong>Краен срок:</strong> @Model.DueDate.ToString("dd.MM.yyyy")
+</p>
+
+<div class="card p-3 mb-3">
+    <h5>Описание</h5>
+    <p>@Model.Description</p>
+</div>
+
+<hr />
+
+@if (submission == null)
+{
+    <div class="alert alert-warning">
+        Все още не си предал решение за това домашно.
+    </div>
+
+    <a class="btn btn-success"
+       asp-action="Submit"
+       asp-route-homeworkId="@Model.Id">
+        Предай решение
+    </a>
+}
+else
+{
+    <div class="alert alert-info">
+        <p>
+            <strong>Предадено на:</strong>
+            @submission.SubmittedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
+        </p>
+
+        @if (submission.Grade != null)
+        {
+            <p>
+                <strong>Оценка:</strong> @submission.Grade
+            </p>
+        }
+        else
+        {
+            <p>⏳ Все още не е оценено.</p>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(submission.Feedback))
+        {
+            <p>
+                📝 <strong>Коментар:</strong> @submission.Feedback
+            </p>
+        }
+    </div>
+
+    <a class="btn btn-secondary"
+       asp-action="EditSubmission"
+       asp-route-id="@submission.Id">
+        Редактирай решение
+    </a>
+}
+
+<a class="btn btn-outline-dark ms-2"
+   asp-action="Index">
+    Back
+</a>
+

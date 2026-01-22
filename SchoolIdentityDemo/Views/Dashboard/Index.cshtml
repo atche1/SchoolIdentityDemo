@@ -1,0 +1,49 @@
+﻿@model SchoolIdentityDemo.Models.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>Dashboard</h1>
+<p>Влязъл потребител: <strong>@Model.Email</strong></p>
+
+@if (Model.Role == "Admin")
+{
+    <div class="alert alert-warning">
+        <h4>Admin табло</h4>
+        <a class="btn btn-primary" asp-controller="AdminRoles" asp-action="Index">Управление на роли</a>
+    </div>
+}
+else if (Model.Role == "Teacher")
+{
+    <div class="alert alert-info">
+        <h4>Teacher табло</h4>
+        @if (Model.TeacherProfile != null)
+        {
+            <p>Предмет: <strong>@Model.TeacherProfile.Subject</strong></p>
+            <p>Кабинет: <strong>@Model.TeacherProfile.Room</strong></p>
+        }
+        else
+        {
+            <p>Нямаш попълнен профил. Попълни го от „Моят профил“.</p>
+        }
+        <a class="btn btn-success" asp-controller="Teacher" asp-action="Index">Към Teacher зоната</a>
+        <a class="btn btn-secondary" asp-controller="TeacherProfile" asp-action="EditMy">Моят профил</a>
+    </div>
+}
+else
+{
+    <div class="alert alert-success">
+        <h4>Student табло</h4>
+        @if (Model.StudentProfile != null)
+        {
+            <p>Клас: <strong>@Model.StudentProfile.Grade</strong>, № <strong>@Model.StudentProfile.NumberInClass</strong></p>
+            <p>Специалност: <strong>@Model.StudentProfile.Specialty</strong></p>
+        }
+        else
+        {
+            <p>Нямаш попълнен профил. Попълни го от „Моят профил“.</p>
+        }
+        <a class="btn btn-success" asp-controller="Student" asp-action="Index">Към Student зоната</a>
+        <a class="btn btn-secondary" asp-controller="StudentProfile" asp-action="EditMy">Моят профил</a>
+    </div>
+}

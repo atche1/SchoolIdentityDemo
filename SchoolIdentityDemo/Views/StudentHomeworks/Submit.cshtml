@@ -1,0 +1,37 @@
+﻿@model SchoolIdentityDemo.Models.HomeworkSubmission
+
+@{
+    ViewData["Title"] = "Предаване на решение";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="HomeworkId" />
+
+    <div class="mb-3">
+        <label class="form-label">Решение (текст)</label>
+        <textarea class="form-control"
+                  asp-for="Content"
+                  rows="8"
+                  placeholder="Напиши решението си тук..."></textarea>
+        <span class="text-danger" asp-validation-for="Content"></span>
+    </div>
+
+    <button class="btn btn-success" type="submit">
+        Предай
+    </button>
+
+    <a class="btn btn-secondary"
+       asp-action="Details"
+       asp-route-id="@Model.HomeworkId">
+        Back
+    </a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
